@@ -1,8 +1,9 @@
 import pytest
 
 from transact_api import TransactApiClient
-from transact_api.endpoints.validate_aba_routing_number import \
-    ValidateAbaRoutingNumberResponse
+from transact_api.endpoints.validate_aba_routing_number import (
+    ValidateAbaRoutingNumberResponse,
+)
 
 
 @pytest.fixture

@@ -2,11 +2,12 @@ from dataclasses import dataclass
 
 from requests import Response, request
 
-from transact_api.endpoints.get_offering import (GetOfferingRequest,
-                                                 GetOfferingResponse)
+from transact_api.endpoints.get_offering import GetOfferingRequest, GetOfferingResponse
 from transact_api.endpoints.get_trade import GetTradeRequest, GetTradeResponse
 from transact_api.endpoints.validate_aba_routing_number import (
-    ValidateAbaRoutingNumberRequest, ValidateAbaRoutingNumberResponse)
+    ValidateAbaRoutingNumberRequest,
+    ValidateAbaRoutingNumberResponse,
+)
 from transact_api.errors import ERRORS
 
 
