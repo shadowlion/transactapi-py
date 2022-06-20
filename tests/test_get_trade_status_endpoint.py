@@ -13,13 +13,13 @@ def mocked_response(mocker):
             "tradeDetails": [
                 {
                     "id": "787594",
-                    "developerAPIKey": "U4Msub8Kn7tkjUJ3Dv4F7kGOKyC8NAdRIjC",
-                    "offeringId": "52675",
-                    "accountId": "A11501",
-                    "partyId": "P56836",
+                    "developerAPIKey": "somedeveloperkey",
+                    "offeringId": "someofferingid",
+                    "accountId": "someaccountid",
+                    "partyId": "somepartyid",
                     "party_type": "",
                     "escrowId": None,
-                    "orderId": "141103099",
+                    "orderId": "sometradeid",
                     "transactionType": "WIRE",
                     "totalAmount": "12000.000000",
                     "totalShares": "120.000000",
