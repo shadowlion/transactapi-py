@@ -40,6 +40,19 @@ trade = client.get_trade(
 print(trade.partyDetails[0]["orderId"])
 ```
 
+alternatively, you can use a context manager:
+
+```python
+from transact_api import TransactApiClient
+
+with TransactApiClient(client_id="", developer_api_key="") as client:
+    trade = client.get_trade(
+        account_id="",
+        trade_id="",
+    )
+    print(trade.partyDetails[0]["orderId"])
+```
+
 ## How to Contribute
 
 Take a look at the [documentation](transactapi-docs), find which endpoint hasn't been covered yet. Normally, you will want to do the following on github:

@@ -1,10 +1,10 @@
 from dataclasses import dataclass
-from typing import List, Optional, TypedDict
+from typing import List, Optional
+
+from transact_api.endpoints import BaseRequest
 
 
-class GetOfferingRequest(TypedDict):
-    clientID: str
-    developerAPIKey: str
+class GetOfferingRequest(BaseRequest):
     offeringId: str
 
 

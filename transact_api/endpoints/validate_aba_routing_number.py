@@ -1,10 +1,10 @@
 from dataclasses import dataclass
-from typing import Optional, TypedDict
+from typing import Optional
+
+from transact_api.endpoints import BaseRequest
 
 
-class ValidateAbaRoutingNumberRequest(TypedDict):
-    clientID: str
-    developerAPIKey: str
+class ValidateAbaRoutingNumberRequest(BaseRequest):
     routingNumber: str
 
 

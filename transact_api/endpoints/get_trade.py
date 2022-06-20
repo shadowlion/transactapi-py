@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List, Optional, TypedDict, Union
+from typing import List, Optional, Union
+
+from transact_api.endpoints import BaseRequest
 
 
-class GetTradeRequest(TypedDict):
-    clientID: str
-    developerAPIKey: str
+class GetTradeRequest(BaseRequest):
     accountId: str
     tradeId: str
 
