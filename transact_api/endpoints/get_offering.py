@@ -1,7 +1,6 @@
 from dataclasses import dataclass
-from typing import List, Optional
 
-from transact_api.endpoints import BaseRequest
+from transact_api.endpoints import BaseRequest, BaseResponse
 
 
 class GetOfferingRequest(BaseRequest):
@@ -27,7 +26,5 @@ class OfferingDetail:
 
 
 @dataclass
-class GetOfferingResponse:
-    statusCode: str
-    statusDesc: str
-    offeringDetails: Optional[List[OfferingDetail]] = None
+class GetOfferingResponse(BaseResponse):
+    offeringDetails: OfferingDetail

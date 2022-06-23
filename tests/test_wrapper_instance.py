@@ -14,4 +14,3 @@ def test_class_instantiation_with_keys():
     assert client.client_id == "asdf"
     assert client.developer_api_key == "qwer"
     assert not client.sandbox
-    assert client.base_url == "https://api.norcapsecurities.com/tapiv3/index.php/v3"

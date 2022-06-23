@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List, Optional, Union
+from typing import Union
 
-from transact_api.endpoints import BaseRequest
+from transact_api.endpoints import BaseRequest, BaseResponse
 
 
 class GetTradeRequest(BaseRequest):
@@ -44,7 +44,5 @@ class PartyDetail:
 
 
 @dataclass
-class GetTradeResponse:
-    statusCode: str
-    statusDesc: str
-    partyDetails: Optional[List[PartyDetail]] = None
+class GetTradeResponse(BaseResponse):
+    partyDetails: PartyDetail

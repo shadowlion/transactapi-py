@@ -1,7 +1,6 @@
 from dataclasses import dataclass
-from typing import Optional
 
-from transact_api.endpoints import BaseRequest
+from transact_api.endpoints import BaseRequest, BaseResponse
 
 
 class ValidateAbaRoutingNumberRequest(BaseRequest):
@@ -9,7 +8,5 @@ class ValidateAbaRoutingNumberRequest(BaseRequest):
 
 
 @dataclass
-class ValidateAbaRoutingNumberResponse:
-    statusCode: str
-    statusDesc: str
-    accountDetails: Optional[str] = None
+class ValidateAbaRoutingNumberResponse(BaseResponse):
+    accountDetails: str

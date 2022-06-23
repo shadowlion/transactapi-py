@@ -23,14 +23,14 @@ class TransactApiClient:
     sandbox: bool = False
 
     @property
-    def base_url(self):
+    def __base_url(self):
         domain = "api-sandboxdash" if self.sandbox else "api"
         return f"https://{domain}.norcapsecurities.com/tapiv3/index.php/v3"
 
     def __post_request(
         self,
         endpoint: str,
-        data: Any = {},
+        data: Any,
     ) -> requests.Response:
         """Run a generic TransactAPI call.
 
@@ -48,7 +48,7 @@ class TransactApiClient:
             "developerAPIKey": self.developer_api_key,
         }
 
-        return requests.post(url=self.base_url + endpoint, data={**payload, **data})
+        return requests.post(url=self.__base_url + endpoint, data={**payload, **data})
 
     def get_offering(
         self,
@@ -148,9 +148,13 @@ class TransactApiClient:
         Returns:
             (GetTradeStatusResponse) response object
         """
-        payload = GetTradeStatusRequest(tradeId=trade_id)
+        payload = GetTradeStatusRequest(
+            clientID=self.client_id,
+            developerAPIKey=self.developer_api_key,
+            tradeId=trade_id,
+        )
         r = self.__post_request(endpoint="/getTradeStatus", data=dict(payload))
         assert r.status_code == 200, f"Bad API call: {r.status_code}"
-        res = GetTradeResponse(**r.json())
+        res = GetTradeStatusResponse(**r.json())
         assert res.statusCode == "101", ERRORS[res.statusCode]
         return res

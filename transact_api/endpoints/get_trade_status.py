@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List, Optional
 
-from transact_api.endpoints import BaseRequest
+from transact_api.endpoints import BaseRequest, BaseResponse
 
 
 class GetTradeStatusRequest(BaseRequest):
@@ -37,7 +36,5 @@ class TradeDetail:
 
 
 @dataclass
-class GetTradeStatusResponse:
-    statusCode: str
-    statusDesc: str
-    tradeDetails: Optional[List[TradeDetail]] = None
+class GetTradeStatusResponse(BaseResponse):
+    tradeDetails: TradeDetail
