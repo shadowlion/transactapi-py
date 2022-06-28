@@ -1,12 +1,13 @@
 [tool.poetry]
 name = "transact_api"
 version = "0.0.4"
-description = "Python wrapper for Transact API"
+description = "Unofficial python wrapper for Transact API"
 authors = ["Justin Chiou <justin@wunderfund.co>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
 requests = "^2.27.1"
+pre-commit = "^2.19.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"
