@@ -47,5 +47,5 @@ def test_get_offering_endpoint(mocked_response):
         developer_api_key="somedeveloperkey",
     )
     res = client.get_trade_status(trade_id="sometradeid")
-    assert res.statusCode == "101"
-    assert res.statusDesc == "Ok"
+    assert res["statusCode"] == "101"
+    assert res["statusDesc"] == "Ok"

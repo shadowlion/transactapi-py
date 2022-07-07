@@ -1,5 +1,5 @@
-from dataclasses import dataclass
 from datetime import datetime
+from typing import TypedDict
 
 from transact_api.endpoints import BaseRequest, BaseResponse
 
@@ -8,8 +8,7 @@ class GetTradeStatusRequest(BaseRequest):
     tradeId: str
 
 
-@dataclass
-class TradeDetail:
+class TradeDetail(TypedDict):
     id: int
     developerAPIKey: str
     offeringId: int
@@ -30,11 +29,6 @@ class TradeDetail:
     users: str
     archivedstatus: int
 
-    def __post_init__(self) -> None:
-        if type(self.createdDate) is str:
-            self.createdDate = datetime.fromisoformat(self.createdDate)
 
-
-@dataclass
 class GetTradeStatusResponse(BaseResponse):
     tradeDetails: TradeDetail

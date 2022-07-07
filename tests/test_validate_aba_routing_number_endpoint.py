@@ -27,6 +27,6 @@ def test_validate_aba_routing_number_endpoint(mocked_response):
         developer_api_key="somedeveloperkey",
     )
     res = client.validate_aba_routing_number("021000012")
-    assert res.statusCode == "101"
-    assert res.statusDesc == "Ok"
-    assert res.accountDetails == "Valid routing number"
+    assert res["statusCode"] == "101"
+    assert res["statusDesc"] == "Ok"
+    assert res["accountDetails"] == "Valid routing number"

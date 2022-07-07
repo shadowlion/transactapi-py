@@ -1,6 +1,4 @@
-from dataclasses import dataclass
-from datetime import datetime
-from typing import Union
+from typing import List, TypedDict
 
 from transact_api.endpoints import BaseRequest, BaseResponse
 
@@ -10,8 +8,7 @@ class GetTradeRequest(BaseRequest):
     tradeId: str
 
 
-@dataclass
-class PartyDetail:
+class PartyDetail(TypedDict):
     id: int
     developerAPIKey: str
     offeringId: int
@@ -24,7 +21,7 @@ class PartyDetail:
     totalAmount: str
     totalShares: str
     orderStatus: str
-    createdDate: Union[str, datetime]
+    createdDate: str
     createdIpAddress: str
     errors: str
     documentKey: str
@@ -38,11 +35,6 @@ class PartyDetail:
     PrincipalName: str
     PrincipalDate: str
 
-    def __post_init__(self) -> None:
-        if type(self.createdDate) is str:
-            self.createdDate = datetime.fromisoformat(self.createdDate)
 
-
-@dataclass
 class GetTradeResponse(BaseResponse):
-    partyDetails: PartyDetail
+    partyDetails: List[PartyDetail]

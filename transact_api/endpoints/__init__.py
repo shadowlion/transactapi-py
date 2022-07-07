@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import TypedDict
 
 
@@ -7,7 +6,6 @@ class BaseRequest(TypedDict):
     developerAPIKey: str
 
 
-@dataclass
-class BaseResponse:
+class BaseResponse(TypedDict):
     statusCode: str
     statusDesc: str
