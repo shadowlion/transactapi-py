@@ -1,4 +1,4 @@
-from typing import TypedDict
+from dataclasses import dataclass
 
 from transact_api.endpoints import BaseRequest, BaseResponse
 
@@ -7,7 +7,8 @@ class GetOfferingRequest(BaseRequest):
     offeringId: str
 
 
-class OfferingDetail(TypedDict):
+@dataclass
+class OfferingDetail:
     issuerId: str
     offeringId: str
     issueName: str

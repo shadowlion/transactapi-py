@@ -1,5 +1,5 @@
+from dataclasses import dataclass
 from datetime import datetime
-from typing import TypedDict
 
 from transact_api.endpoints import BaseRequest, BaseResponse
 
@@ -8,7 +8,8 @@ class GetTradeStatusRequest(BaseRequest):
     tradeId: str
 
 
-class TradeDetail(TypedDict):
+@dataclass
+class TradeDetail:
     id: int
     developerAPIKey: str
     offeringId: int

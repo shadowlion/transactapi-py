@@ -1,4 +1,5 @@
-from typing import List, TypedDict
+from dataclasses import dataclass
+from typing import List
 
 from transact_api.endpoints import BaseRequest, BaseResponse
 
@@ -8,7 +9,8 @@ class GetTradeRequest(BaseRequest):
     tradeId: str
 
 
-class PartyDetail(TypedDict):
+@dataclass
+class PartyDetail:
     id: int
     developerAPIKey: str
     offeringId: int

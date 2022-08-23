@@ -1,11 +1,13 @@
-from typing import TypedDict
+from dataclasses import dataclass
 
 
-class BaseRequest(TypedDict):
+@dataclass
+class BaseRequest:
     clientID: str
     developerAPIKey: str
 
 
-class BaseResponse(TypedDict):
+@dataclass
+class BaseResponse:
     statusCode: str
     statusDesc: str

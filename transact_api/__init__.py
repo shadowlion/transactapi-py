@@ -17,6 +17,12 @@ from transact_api.errors import ERRORS
 
 
 @dataclass
+class BasePayload:
+    clientID: str
+    developerAPIKey: str
+
+
+@dataclass
 class TransactApiClient:
     client_id: str
     developer_api_key: str
@@ -43,11 +49,10 @@ class TransactApiClient:
         Returns:
             Response: response object
         """
-        payload = {
-            "clientID": self.client_id,
-            "developerAPIKey": self.developer_api_key,
-        }
-
+        payload = BasePayload(
+            clientID=self.client_id,
+            developerAPIKey=self.developer_api_key,
+        )
         return requests.post(url=self.__base_url + endpoint, data={**payload, **data})
 
     def get_offering(
