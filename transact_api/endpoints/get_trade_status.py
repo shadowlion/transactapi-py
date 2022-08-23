@@ -4,6 +4,7 @@ from datetime import datetime
 from transact_api.endpoints import BaseRequest, BaseResponse
 
 
+@dataclass
 class GetTradeStatusRequest(BaseRequest):
     tradeId: str
 
@@ -31,5 +32,6 @@ class TradeDetail:
     archivedstatus: int
 
 
+@dataclass
 class GetTradeStatusResponse(BaseResponse):
     tradeDetails: TradeDetail

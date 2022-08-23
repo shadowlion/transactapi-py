@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from transact_api.endpoints import BaseRequest, BaseResponse
 
 
+@dataclass
 class GetOfferingRequest(BaseRequest):
     offeringId: str
 
@@ -25,5 +26,6 @@ class OfferingDetail:
     offeringText: str
 
 
+@dataclass
 class GetOfferingResponse(BaseResponse):
     offeringDetails: OfferingDetail

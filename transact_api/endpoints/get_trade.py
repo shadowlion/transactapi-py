@@ -4,6 +4,7 @@ from typing import List
 from transact_api.endpoints import BaseRequest, BaseResponse
 
 
+@dataclass
 class GetTradeRequest(BaseRequest):
     accountId: str
     tradeId: str
@@ -38,5 +39,6 @@ class PartyDetail:
     PrincipalDate: str
 
 
+@dataclass
 class GetTradeResponse(BaseResponse):
     partyDetails: List[PartyDetail]
