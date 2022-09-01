@@ -137,6 +137,6 @@ def test_get_offering_endpoint(mocked_response):
         account_id="someaccountid",
         trade_id="sometradeid",
     )
-    assert res["statusCode"] == "101"
-    assert res["statusDesc"] == "Ok"
-    # assert res["partyDetails"][0]["createdDate"] == "2014-12-09 04:29:29"
+    assert res.statusCode == "101"
+    assert res.statusDesc == "Ok"
+    assert len(res.partyDetails) == 4
