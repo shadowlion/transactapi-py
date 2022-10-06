@@ -41,7 +41,7 @@ def mocked_response(mocker):
     )
 
 
-def test_get_offering_endpoint(mocked_response):
+def test_get_trade_status_endpoint(mocked_response):
     client = TransactApiClient(
         client_id="someclientid",
         developer_api_key="somedeveloperkey",
