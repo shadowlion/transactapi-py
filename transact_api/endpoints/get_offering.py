@@ -1,31 +1,47 @@
-from dataclasses import dataclass
+from pydantic import BaseModel, Field
 
-from transact_api.endpoints import BaseRequest, BaseResponse
+from main import BaseRequest, BaseResponse
 
 
-@dataclass
 class GetOfferingRequest(BaseRequest):
-    offeringId: str
+    offeringId: str = Field(alias="offering_id")
+    # offeringId: str
+
+    class Config:
+        @classmethod
+        def alias_generator(cls, string: str) -> str:
+            init, *the_rest = string.split("_")
+            return init + "".join([word.capitalize() for word in the_rest])
 
 
-@dataclass
-class OfferingDetail:
-    issuerId: str
-    offeringId: str
-    issueName: str
-    issueType: str
-    targetAmount: str
-    minAmount: str
-    maxAmount: str
-    unitPrice: str
-    totalShares: str
-    remainingShares: str
-    startDate: str
-    endDate: str
-    offeringStatus: str
-    offeringText: str
+class OfferingDetail(BaseModel):
+    issuer_id: str
+    offering_id: str
+    issue_name: str
+    issue_type: str
+    target_amount: str
+    min_amount: str
+    max_amount: str
+    unit_price: str
+    total_shares: str
+    remaining_shares: str
+    start_date: str
+    end_date: str
+    offering_status: str
+    offering_text: str
+
+    class Config:
+        @classmethod
+        def alias_generator(cls, string: str) -> str:
+            init, *the_rest = string.split("_")
+            return "".join([init.lower(), *map(str.title, the_rest)])
 
 
-@dataclass
 class GetOfferingResponse(BaseResponse):
-    offeringDetails: OfferingDetail
+    offering_details: list[OfferingDetail]
+
+    class Config:
+        @classmethod
+        def alias_generator(cls, string: str) -> str:
+            init, *the_rest = string.split("_")
+            return "".join([init.lower(), *map(str.title, the_rest)])
