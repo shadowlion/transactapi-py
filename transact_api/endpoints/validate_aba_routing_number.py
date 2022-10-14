@@ -1,13 +1,9 @@
-from dataclasses import dataclass
-
 from transact_api.endpoints import BaseRequest, BaseResponse
 
 
-@dataclass
 class ValidateAbaRoutingNumberRequest(BaseRequest):
-    routingNumber: str
+    routing_number: str
 
 
-@dataclass
 class ValidateAbaRoutingNumberResponse(BaseResponse):
-    accountDetails: str
+    account_details: str
