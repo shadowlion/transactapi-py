@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 
-from main import BaseRequest, BaseResponse
+from transact_api.endpoints import BaseRequest, BaseResponse
 
 
 class GetTradeRequest(BaseRequest):
