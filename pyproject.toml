@@ -6,9 +6,9 @@ version = "0.0.4"
 
 [tool.poetry.dependencies]
 pre-commit = "^2.19.0"
+pydantic = "^1.10.2"
 python = "^3.8"
 requests = "^2.28.1"
-pydantic = "^1.10.2"
 
 [tool.poetry.dev-dependencies]
 black = "^22.6.0"
