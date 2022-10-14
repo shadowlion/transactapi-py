@@ -43,6 +43,7 @@ def test_get_offering_endpoint(mocked_response):
         developer_api_key="somedeveloperkey",
     )
     res = client.get_offering("someofferingid")
+    assert isinstance(res, GetOfferingResponse)
     assert res.status_code == "101"
     assert res.status_desc == "Ok"
     assert len(res.offering_details) == 1

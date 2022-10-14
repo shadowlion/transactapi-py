@@ -173,7 +173,7 @@ class TransactApiClient(BaseModel):
         domain = "api-sandboxdash" if self.sandbox else "api"
         return f"https://{domain}.norcapsecurities.com/tapiv3/index.php/v3"
 
-    def get_offering(self, offering_id: str) -> GetOfferingResponse:
+    def get_offering(self, offering_id: str):
         """
         This method is used to get all the details of an offering.
         The Offering ID is required to get the information.
@@ -198,7 +198,7 @@ class TransactApiClient(BaseModel):
         assert res.status_code == "101", ERRORS[res.status_code]
         return res
 
-    def get_trade(self, account_id: str, trade_id: str) -> GetTradeResponse:
+    def get_trade(self, account_id: str, trade_id: str):
         """This method is used to get all the details of all the trades for an
         account. The Account ID is required to get the details.
 
@@ -219,14 +219,14 @@ class TransactApiClient(BaseModel):
         )
         r = requests.post(self.__base_url + "/getTrade", data=payload.dict())
         assert r.status_code == 200, f"Bad API call: {r.status_code}"
-        res = GetOfferingResponse(**r.json())
+        res = GetTradeResponse(**r.json())
         assert res.status_code == "101", ERRORS[res.status_code]
         return res
 
     def validate_aba_routing_number(
         self,
         routing_number: str,
-    ) -> ValidateAbaRoutingNumberResponse:
+    ):
         """This method is used to validate the routing number for an external account
         (createExternalAccount).
 
@@ -253,7 +253,7 @@ class TransactApiClient(BaseModel):
         assert res.status_code == "101", ERRORS[res.status_code]
         return res
 
-    def get_trade_status(self, trade_id: str) -> GetTradeStatusResponse:
+    def get_trade_status(self, trade_id: str):
         """This method is used to retrieve the status and all other current
         information for a specific trade. The TradeID is required as a request
         parameter for this method.

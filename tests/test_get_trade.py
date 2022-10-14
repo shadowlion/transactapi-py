@@ -137,6 +137,7 @@ def test_get_trade(mocked_response):
         account_id="someaccountid",
         trade_id="sometradeid",
     )
+    assert isinstance(res, GetTradeResponse)
     assert res.status_code == "101"
     assert res.status_desc == "Ok"
     assert len(res.party_details) == 4

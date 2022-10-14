@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -38,4 +38,4 @@ class TradeDetail(BaseModel):
 
 
 class GetTradeStatusResponse(BaseResponse):
-    trade_details: list[TradeDetail]
+    trade_details: List[TradeDetail]

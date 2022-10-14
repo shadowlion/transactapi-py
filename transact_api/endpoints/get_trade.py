@@ -1,3 +1,5 @@
+from typing import List
+
 from pydantic import BaseModel, Field
 
 from transact_api.endpoints import BaseRequest, BaseResponse
@@ -43,4 +45,4 @@ class PartyDetail(BaseModel):
 
 
 class GetTradeResponse(BaseResponse):
-    party_details: list[PartyDetail]
+    party_details: List[PartyDetail]

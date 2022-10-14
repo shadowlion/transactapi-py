@@ -47,6 +47,7 @@ def test_get_trade_status_endpoint(mocked_response):
         developer_api_key="somedeveloperkey",
     )
     res = client.get_trade_status(trade_id="sometradeid")
+    assert isinstance(res, GetTradeStatusResponse)
     assert res.status_code == "101"
     assert res.status_desc == "Ok"
     assert len(res.trade_details) == 1

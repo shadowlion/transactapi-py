@@ -1,3 +1,5 @@
+from typing import List
+
 from pydantic import BaseModel
 
 from transact_api.endpoints import BaseRequest, BaseResponse
@@ -31,4 +33,4 @@ class OfferingDetail(BaseModel):
 
 
 class GetOfferingResponse(BaseResponse):
-    offering_details: list[OfferingDetail]
+    offering_details: List[OfferingDetail]

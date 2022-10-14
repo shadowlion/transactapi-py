@@ -29,7 +29,7 @@ def test_validate_aba_routing_number(mocked_response):
     res = client.validate_aba_routing_number(
         routing_number="021000012",
     )
-    print(res.dict())
+    assert isinstance(res, ValidateAbaRoutingNumberResponse)
     assert res.status_code == "101"
     assert res.status_desc == "Ok"
     assert res.account_details == "Valid routing number"
