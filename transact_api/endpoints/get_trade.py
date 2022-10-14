@@ -1,44 +1,46 @@
-from dataclasses import dataclass
-from typing import List
+from pydantic import BaseModel, Field
 
-from transact_api.endpoints import BaseRequest, BaseResponse
+from main import BaseRequest, BaseResponse
 
 
-@dataclass
 class GetTradeRequest(BaseRequest):
-    accountId: str
-    tradeId: str
+    account_id: str
+    trade_id: str
 
 
-@dataclass
-class PartyDetail:
+class PartyDetail(BaseModel):
     id: int
-    developerAPIKey: str
-    offeringId: int
-    accountId: str
-    partyId: str
-    partytype: str
-    escrowId: str
-    orderId: int
-    transactionType: str
-    totalAmount: str
-    totalShares: str
-    orderStatus: str
-    createdDate: str
-    createdIpAddress: str
+    developer_api_key: str = Field(alias="developerAPIKey")
+    offering_id: int
+    account_id: str
+    party_id: str
+    party_type: str = Field(alias="party_type")
+    escrow_id: str
+    order_id: int
+    transaction_type: str
+    total_amount: str
+    total_shares: str
+    order_status: str
+    created_date: str
+    created_ip_address: str
     errors: str
-    documentKey: str
-    esignStatus: str
+    document_key: str
+    esign_status: str
     users: str
-    archivedstatus: int
-    RRApprovalStatus: str
-    RRName: str
-    RRApprovalDate: str
-    PrincipalApprovalStatus: str
-    PrincipalName: str
-    PrincipalDate: str
+    archived_status: int = Field(alias="archived_status")
+    rr_approval_status: str = Field(alias="RRApprovalStatus")
+    rr_name: str = Field(alias="RRName")
+    rr_approval_date: str = Field(alias="RRApprovalDate")
+    principal_approval_status: str = Field(alias="PrincipalApprovalStatus")
+    principal_name: str = Field(alias="PrincipalName")
+    prinicpal_date: str = Field(alias="PrincipalDate")
+
+    class Config:
+        @classmethod
+        def alias_generator(cls, string: str) -> str:
+            init, *the_rest = string.split("_")
+            return "".join([init.lower(), *map(str.title, the_rest)])
 
 
-@dataclass
 class GetTradeResponse(BaseResponse):
-    partyDetails: List[PartyDetail]
+    party_details: list[PartyDetail]

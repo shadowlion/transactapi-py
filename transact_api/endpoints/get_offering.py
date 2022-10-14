@@ -1,17 +1,10 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from main import BaseRequest, BaseResponse
 
 
 class GetOfferingRequest(BaseRequest):
-    offeringId: str = Field(alias="offering_id")
-    # offeringId: str
-
-    class Config:
-        @classmethod
-        def alias_generator(cls, string: str) -> str:
-            init, *the_rest = string.split("_")
-            return init + "".join([word.capitalize() for word in the_rest])
+    offering_id: str
 
 
 class OfferingDetail(BaseModel):
@@ -39,9 +32,3 @@ class OfferingDetail(BaseModel):
 
 class GetOfferingResponse(BaseResponse):
     offering_details: list[OfferingDetail]
-
-    class Config:
-        @classmethod
-        def alias_generator(cls, string: str) -> str:
-            init, *the_rest = string.split("_")
-            return "".join([init.lower(), *map(str.title, the_rest)])

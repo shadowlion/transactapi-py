@@ -128,7 +128,7 @@ def mocked_response(mocker):
     )
 
 
-def test_get_trade_endpoint(mocked_response):
+def test_get_trade(mocked_response):
     client = TransactApiClient(
         client_id="someclientid",
         developer_api_key="somedeveloperkey",
@@ -137,6 +137,6 @@ def test_get_trade_endpoint(mocked_response):
         account_id="someaccountid",
         trade_id="sometradeid",
     )
-    assert res.statusCode == "101"
-    assert res.statusDesc == "Ok"
-    assert len(res.partyDetails) == 4
+    assert res.status_code == "101"
+    assert res.status_desc == "Ok"
+    assert len(res.party_details) == 4
