@@ -2,7 +2,7 @@
 authors = ["Justin Chiou <justin@wunderfund.co>"]
 description = "Unofficial python wrapper for TransactAPI, provided by North Capital Private Securities"
 name = "transact_api"
-version = "0.0.5"
+version = "0.0.6"
 
 [tool.poetry.dependencies]
 pre-commit = "^2.19.0"
