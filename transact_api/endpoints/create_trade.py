@@ -1,4 +1,4 @@
-from datetime import datetime
+# from datetime import datetime
 from enum import Enum
 from typing import List, Union
 
@@ -25,7 +25,7 @@ class PurchaseDetail(BaseModel):
     trade_id: int
     transaction_id: str
     transaction_amount: str
-    transaction_date: datetime
+    transaction_date: str  # TODO: convert to datetime
     transaction_status: str
     rr_approval_status: str = Field(alias="RRApprovalStatus")
     rr_name: str = Field(alias="RRName")

@@ -1,4 +1,4 @@
-from __future__ import annotations
+from typing import List, Union
 
 from pydantic import BaseModel
 
@@ -12,13 +12,13 @@ class GetPartyRequest(BaseRequest):
 class PartyDetail(BaseModel):
     party_id: str
     first_name: str
-    middle_initial: str | None
+    middle_initial: Union[str, None]
     last_name: str
     domicile: str
     social_security_number: str
     dob: str
     prim_address_1: str
-    prim_address_2: str | None
+    prim_address_2: Union[str, None]
     prim_city: str
     prim_state: str
     prim_zip: str
@@ -31,7 +31,7 @@ class PartyDetail(BaseModel):
     associated_person: str
     emp_country: str
     emp_address_1: str
-    emp_address_2: str | None
+    emp_address_2: Union[str, None]
     emp_city: str
     emp_state: str
     emp_zip: str
@@ -57,4 +57,4 @@ class PartyDetail(BaseModel):
 
 
 class GetPartyResponse(BaseResponse):
-    party_details: list[PartyDetail]
+    party_details: List[PartyDetail]
