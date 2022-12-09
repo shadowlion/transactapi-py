@@ -98,14 +98,11 @@ class TransactApiClient(BaseModel):
         """
 
         payload = ValidateAbaRoutingNumberRequest(
-            clientID=self.client_id,
-            developerAPIKey=self.developer_api_key,
-            routingNumber=routing_number,
-        )
-        r = requests.post(
-            self.__base_url + "/validateABARoutingNumber",
-            data=payload.dict(),
-        )
+            client_id=self.client_id,
+            developer_api_key=self.developer_api_key,
+            routing_number=routing_number,
+        ).as_json()
+        r = requests.post(self.__base_url + "/validateABARoutingNumber", json=payload)
         assert r.status_code == 200, f"Bad API call: {r.status_code}"
         res = ValidateAbaRoutingNumberResponse(**r.json())
         assert res.status_code == "101", ERRORS[res.status_code]

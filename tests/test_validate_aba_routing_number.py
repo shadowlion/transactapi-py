@@ -1,27 +1,57 @@
 import pytest
+import requests
+import responses
 
 from transact_api import TransactApiClient
 from transact_api.endpoints.validate_aba_routing_number import (
     ValidateAbaRoutingNumberResponse,
 )
 
-example_data_successful = {
-    "statusCode": "101",
-    "statusDesc": "Ok",
-    "accountDetails": "Valid routing number",
-}
-
 
 @pytest.fixture
-def mocked_response(mocker):
-    example_response = ValidateAbaRoutingNumberResponse(**example_data_successful)
-    mocker.patch(
-        "transact_api.TransactApiClient.validate_aba_routing_number",
-        return_value=example_response,
+def mocked_responses() -> responses.RequestsMock:
+    with responses.RequestsMock() as rsps:
+        rsps.add(
+            "POST",
+            "https://api.norcapsecurities.com/tapiv3/index.php/v3/validateABARoutingNumber",  # noqa E502
+            status=200,
+            content_type="application/json",
+            match=[
+                responses.matchers.json_params_matcher(
+                    {
+                        "clientID": "someclientid",
+                        "developerAPIKey": "somedeveloperkey",
+                        "routingNumber": "021000012",
+                    }
+                ),
+            ],
+            json={
+                "statusCode": "101",
+                "statusDesc": "Ok",
+                "accountDetails": "Valid routing number",
+            },
+        )
+
+        yield rsps
+
+
+def test_api_directly(mocked_responses: responses.RequestsMock) -> None:
+    resp = requests.request(
+        "POST",
+        "https://api.norcapsecurities.com/tapiv3/index.php/v3/validateABARoutingNumber",
+        json={
+            "clientID": "someclientid",
+            "developerAPIKey": "somedeveloperkey",
+            "routingNumber": "021000012",
+        },
     )
+    assert resp.status_code == 200
+    assert resp.json()["statusCode"] == "101"
+    assert resp.json()["statusDesc"] == "Ok"
+    assert resp.json()["accountDetails"] == "Valid routing number"
 
 
-def test_validate_aba_routing_number(mocked_response):
+def test_api_from_client(mocked_responses: responses.RequestsMock) -> None:
     client = TransactApiClient(
         client_id="someclientid",
         developer_api_key="somedeveloperkey",
