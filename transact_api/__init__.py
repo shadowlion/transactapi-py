@@ -148,8 +148,8 @@ class TransactApiClient(BaseModel):
             client_id=self.client_id,
             developer_api_key=self.developer_api_key,
             account_id=account_id,
-        )
-        r = requests.post(self.__base_url + "/getAccount", data=payload.dict())
+        ).as_json()
+        r = requests.post(self.__base_url + "/getAccount", json=payload)
         assert r.status_code == 200, f"Bad API call: {r.status_code}"
         res = GetAccountResponse(**r.json())
         assert res.status_code == "101", ERRORS[res.status_code]

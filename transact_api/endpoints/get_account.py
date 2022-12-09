@@ -6,6 +6,13 @@ from transact_api.endpoints import BaseRequest, BaseResponse
 class GetAccountRequest(BaseRequest):
     account_id: str
 
+    def as_json(self) -> dict:
+        return {
+            "clientID": self.client_id,
+            "developerAPIKey": self.developer_api_key,
+            "accountId": self.account_id,
+        }
+
 
 class AccountDetail(BaseModel):
     account_id: str
@@ -53,4 +60,4 @@ class AccountDetail(BaseModel):
 
 
 class GetAccountResponse(BaseResponse):
-    account_details: AccountDetail
+    account_details: AccountDetail = Field(alias="accountDetails")
