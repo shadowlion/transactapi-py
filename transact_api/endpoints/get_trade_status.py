@@ -8,9 +8,16 @@ from transact_api.endpoints import BaseRequest, BaseResponse
 class GetTradeStatusRequest(BaseRequest):
     trade_id: str
 
+    def as_json(self) -> dict:
+        return {
+            "clientID": self.client_id,
+            "developerAPIKey": self.developer_api_key,
+            "tradeId": self.trade_id,
+        }
+
 
 class TradeDetail(BaseModel):
-    id: int
+    id: str
     developer_api_key: str = Field(alias="developerAPIKey")
     offering_id: str
     account_id: str
@@ -38,4 +45,4 @@ class TradeDetail(BaseModel):
 
 
 class GetTradeStatusResponse(BaseResponse):
-    trade_details: List[TradeDetail]
+    trade_details: List[TradeDetail] = Field(alias="tradeDetails")
