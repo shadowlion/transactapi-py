@@ -1,9 +1,17 @@
 import pytest
+import requests
+import responses
 
 from transact_api import TransactApiClient
 from transact_api.endpoints.get_party import GetPartyResponse
 
-example_data_successful = {
+match_request = {
+    "clientID": "someclientid",
+    "developerAPIKey": "somedeveloperkey",
+    "partyId": "P79443",
+}
+
+successful_response = {
     "statusCode": "101",
     "statusDesc": "Ok",
     "partyDetails": [
@@ -52,23 +60,45 @@ example_data_successful = {
 
 
 @pytest.fixture
-def mocked_response(mocker):
-    example_response = GetPartyResponse(**example_data_successful)
-    mocker.patch(
-        "transact_api.TransactApiClient.get_party",
-        return_value=example_response,
+def mocked_responses() -> responses.RequestsMock:
+    with responses.RequestsMock() as rsps:
+        rsps.add(
+            "POST",
+            "https://api.norcapsecurities.com/tapiv3/index.php/v3/getParty",
+            status=200,
+            content_type="application/json",
+            match=[responses.matchers.json_params_matcher(match_request)],
+            json=successful_response,
+        )
+        yield rsps
+
+
+def test_api_directly(mocked_responses: responses.RequestsMock) -> None:
+    resp = requests.request(
+        "POST",
+        "https://api.norcapsecurities.com/tapiv3/index.php/v3/getParty",
+        json={
+            "clientID": "someclientid",
+            "developerAPIKey": "somedeveloperkey",
+            "partyId": "P79443",
+        },
     )
+    assert resp.status_code == 200
+    assert resp.json()["statusCode"] == "101"
+    assert resp.json()["statusDesc"] == "Ok"
+    assert resp.json()["partyDetails"][0]["partyId"] == "P79443"
 
 
-def test_get_account(mocked_response):
-    party_id = "P79443"
+def test_api_from_client(mocked_responses: responses.RequestsMock) -> None:
     client = TransactApiClient(
         client_id="someclientid",
         developer_api_key="somedeveloperkey",
     )
-    res = client.get_party(party_id=party_id)
+    res = client.get_party(
+        party_id="P79443",
+    )
     assert isinstance(res, GetPartyResponse)
     assert res.status_code == "101"
     assert res.status_desc == "Ok"
+    assert res.party_details[0].party_id == "P79443"
     assert len(res.party_details) == 1
-    assert party_id == res.party_details[0].party_id

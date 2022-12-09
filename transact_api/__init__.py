@@ -169,8 +169,8 @@ class TransactApiClient(BaseModel):
             client_id=self.client_id,
             developer_api_key=self.developer_api_key,
             party_id=party_id,
-        )
-        r = requests.post(self.__base_url + "/getParty", data=payload.dict())
+        ).as_json()
+        r = requests.post(self.__base_url + "/getParty", json=payload)
         assert r.ok, f"Bad API call: {r.status_code}"
         res = GetPartyResponse(**r.json())
         assert res.status_code == "101", ERRORS[res.status_code]

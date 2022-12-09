@@ -1,12 +1,19 @@
 from typing import List, Union
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from transact_api.endpoints import BaseRequest, BaseResponse
 
 
 class GetPartyRequest(BaseRequest):
     party_id: str
+
+    def as_json(self) -> dict:
+        return {
+            "clientID": self.client_id,
+            "developerAPIKey": self.developer_api_key,
+            "partyId": self.party_id,
+        }
 
 
 class PartyDetail(BaseModel):
@@ -57,4 +64,4 @@ class PartyDetail(BaseModel):
 
 
 class GetPartyResponse(BaseResponse):
-    party_details: List[PartyDetail]
+    party_details: List[PartyDetail] = Field(alias="partyDetails")
