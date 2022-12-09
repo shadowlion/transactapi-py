@@ -1,12 +1,19 @@
 from typing import List
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from transact_api.endpoints import BaseRequest, BaseResponse
 
 
 class GetOfferingRequest(BaseRequest):
     offering_id: str
+
+    def as_json(self) -> dict:
+        return {
+            "clientID": self.client_id,
+            "developerAPIKey": self.developer_api_key,
+            "offeringId": self.offering_id,
+        }
 
 
 class OfferingDetail(BaseModel):
@@ -33,4 +40,4 @@ class OfferingDetail(BaseModel):
 
 
 class GetOfferingResponse(BaseResponse):
-    offering_details: List[OfferingDetail]
+    offering_details: List[OfferingDetail] = Field(alias="offeringDetails")

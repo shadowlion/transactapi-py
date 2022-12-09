@@ -49,8 +49,8 @@ class TransactApiClient(BaseModel):
             client_id=self.client_id,
             developer_api_key=self.developer_api_key,
             offering_id=offering_id,
-        )
-        r = requests.post(self.__base_url + "/getOffering", data=payload.dict())
+        ).as_json()
+        r = requests.post(self.__base_url + "/getOffering", json=payload)
         assert r.status_code == 200, f"Bad API call: {r.status_code}"
         res = GetOfferingResponse(**r.json())
         assert res.status_code == "101", ERRORS[res.status_code]
