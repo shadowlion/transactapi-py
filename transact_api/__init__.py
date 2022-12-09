@@ -210,8 +210,8 @@ class TransactApiClient(BaseModel):
             account_id=account_id,
             transaction_type=transaction_type,
             transaction_units=transaction_units,
-        )
-        r = requests.post(self.__base_url + "/createTrade", data=payload.dict())
+        ).as_json()
+        r = requests.post(self.__base_url + "/createTrade", json=payload)
         assert r.ok, f"Bad API call: {r.status_code}"
         res = CreateTradeResponse(**r.json())
         assert res.status_code == "101", ERRORS[res.status_code]

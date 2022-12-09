@@ -20,6 +20,16 @@ class CreateTradeRequest(BaseRequest):
     transaction_type: TransactionType
     transaction_units: float
 
+    def as_json(self) -> dict:
+        return {
+            "clientID": self.client_id,
+            "developerAPIKey": self.developer_api_key,
+            "offeringId": self.offering_id,
+            "accountId": self.account_id,
+            "transactionType": self.transaction_type,
+            "transactionUnits": self.transaction_units,
+        }
+
 
 class PurchaseDetail(BaseModel):
     trade_id: int
@@ -42,4 +52,6 @@ class PurchaseDetail(BaseModel):
 
 
 class CreateTradeResponse(BaseResponse):
-    purchase_details: List[Union[List[PurchaseDetail], bool]]
+    purchase_details: List[Union[List[PurchaseDetail], bool]] = Field(
+        alias="purchaseDetails"
+    )
