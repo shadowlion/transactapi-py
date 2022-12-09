@@ -9,6 +9,14 @@ class GetTradeRequest(BaseRequest):
     account_id: str
     trade_id: str
 
+    def as_json(self) -> dict:
+        return {
+            "clientID": self.client_id,
+            "developerAPIKey": self.developer_api_key,
+            "accountId": self.account_id,
+            "tradeId": self.trade_id,
+        }
+
 
 class PartyDetail(BaseModel):
     id: int
@@ -45,4 +53,4 @@ class PartyDetail(BaseModel):
 
 
 class GetTradeResponse(BaseResponse):
-    party_details: List[PartyDetail]
+    party_details: List[PartyDetail] = Field(alias="partyDetails")
