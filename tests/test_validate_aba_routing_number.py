@@ -7,6 +7,18 @@ from transact_api.endpoints.validate_aba_routing_number import (
     ValidateAbaRoutingNumberResponse,
 )
 
+match_request = {
+    "clientID": "someclientid",
+    "developerAPIKey": "somedeveloperkey",
+    "routingNumber": "021000012",
+}
+
+successful_response = {
+    "statusCode": "101",
+    "statusDesc": "Ok",
+    "accountDetails": "Valid routing number",
+}
+
 
 @pytest.fixture
 def mocked_responses() -> responses.RequestsMock:
@@ -16,20 +28,8 @@ def mocked_responses() -> responses.RequestsMock:
             "https://api.norcapsecurities.com/tapiv3/index.php/v3/validateABARoutingNumber",  # noqa E502
             status=200,
             content_type="application/json",
-            match=[
-                responses.matchers.json_params_matcher(
-                    {
-                        "clientID": "someclientid",
-                        "developerAPIKey": "somedeveloperkey",
-                        "routingNumber": "021000012",
-                    }
-                ),
-            ],
-            json={
-                "statusCode": "101",
-                "statusDesc": "Ok",
-                "accountDetails": "Valid routing number",
-            },
+            match=[responses.matchers.json_params_matcher(match_request)],
+            json=successful_response,
         )
 
         yield rsps

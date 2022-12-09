@@ -55,29 +55,6 @@ successful_response = {
 }
 
 
-# @pytest.fixture
-# def mocked_response(mocker):
-#     example_response = GetAccountResponse(**example_data_successful)
-#     mocker.patch(
-#         "transact_api.TransactApiClient.get_account",
-#         return_value=example_response,
-#     )
-
-
-# def test_get_account(mocked_response):
-#     client = TransactApiClient(
-#         client_id="someclientid",
-#         developer_api_key="somedeveloperkey",
-#     )
-#     res = client.get_account(
-#         account_id="someaccountid",
-#     )
-#     assert isinstance(res, GetAccountResponse)
-#     assert res.status_code == "101"
-#     assert res.status_desc == "Ok"
-#     # assert len(res.party_details) == 4
-
-
 @pytest.fixture
 def mocked_responses() -> responses.RequestsMock:
     with responses.RequestsMock() as rsps:
