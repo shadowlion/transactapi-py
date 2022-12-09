@@ -2,7 +2,7 @@
 authors = ["Justin Chiou <justin@wunderfund.co>"]
 description = "Unofficial python wrapper for TransactAPI, provided by North Capital Private Securities"
 name = "transact_api"
-version = "0.0.7"
+version = "0.7.1"
 
 [tool.poetry.dependencies]
 pydantic = "^1.10.2"
@@ -24,6 +24,7 @@ types-requests = "^2.28.7"
 black = "^22.10.0"
 mypy = "^0.982"
 pytest-cov = "^4.0.0"
+responses = "^0.22.0"
 types-requests = "^2.28.11.2"
 
 [build-system]
